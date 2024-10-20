@@ -19,12 +19,12 @@ import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import androidx.core.view.updatePadding
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -46,6 +46,7 @@ import me.bogerchan.niervisualizer.NierVisualizerManager
 import org.lineageos.twelve.R
 import org.lineageos.twelve.TwelveApplication
 import org.lineageos.twelve.ext.getViewProperty
+import org.lineageos.twelve.ext.updatePadding
 import org.lineageos.twelve.models.PlaybackState
 import org.lineageos.twelve.models.RepeatMode
 import org.lineageos.twelve.models.RequestStatus
@@ -63,6 +64,7 @@ class NowPlayingFragment : Fragment(R.layout.fragment_now_playing) {
 
     // Views
     private val addOrRemoveFromPlaylistsMaterialButton by getViewProperty<MaterialButton>(R.id.addOrRemoveFromPlaylistsMaterialButton)
+    private val albumArtConstraintLayout by getViewProperty<ConstraintLayout?>(R.id.albumArtConstraintLayout)
     private val albumArtImageView by getViewProperty<ImageView>(R.id.albumArtImageView)
     private val albumTitleTextView by getViewProperty<TextView>(R.id.albumTitleTextView)
     private val audioTitleTextView by getViewProperty<TextView>(R.id.audioTitleTextView)
@@ -158,11 +160,37 @@ class NowPlayingFragment : Fragment(R.layout.fragment_now_playing) {
         super.onViewCreated(view, savedInstanceState)
 
         // Insets
+        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
+
+            v.updatePadding(
+                insets,
+                start = true,
+                end = true,
+            )
+
+            windowInsets
+        }
+
+        albumArtConstraintLayout?.let {
+            ViewCompat.setOnApplyWindowInsetsListener(it) { v, windowInsets ->
+                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+                v.updatePadding(
+                    insets,
+                    bottom = true,
+                )
+
+                windowInsets
+            }
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(nestedScrollView) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 
             v.updatePadding(
-                bottom = insets.bottom,
+                insets,
+                bottom = true,
             )
 
             windowInsets
