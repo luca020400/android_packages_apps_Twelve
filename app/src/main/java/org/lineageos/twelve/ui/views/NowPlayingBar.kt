@@ -8,11 +8,15 @@ package org.lineageos.twelve.ui.views
 import android.content.Context
 import android.graphics.ImageDecoder
 import android.util.AttributeSet
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import com.google.android.material.card.MaterialCardView
@@ -33,8 +37,44 @@ class NowPlayingBar @JvmOverloads constructor(
     private val thumbnailImageView by lazy { findViewById<ImageView>(R.id.thumbnailImageView) }
     private val titleTextView by lazy { findViewById<TextView>(R.id.titleTextView) }
 
+    private var isBottomNavigationBar = false
+
     init {
         inflate(context, R.layout.now_playing_bar, this)
+
+        context.obtainStyledAttributes(attrs, R.styleable.NowPlayingBar, 0, 0).apply {
+            try {
+                isBottomNavigationBar = getBoolean(
+                    R.styleable.NowPlayingBar_isBottomNavigationBar,
+                    false
+                )
+            } finally {
+                recycle()
+            }
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(this) { _, windowInsets ->
+            val insets = windowInsets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+
+            updateLayoutParams<MarginLayoutParams> {
+                leftMargin = insets.left
+                rightMargin = insets.right
+            }
+
+            materialCardView.setContentPadding(
+                0,
+                0,
+                0,
+                when (isBottomNavigationBar) {
+                    true -> insets.bottom
+                    false -> 0
+                }
+            )
+
+            windowInsets
+        }
 
         circularProgressIndicator.min = 0
     }

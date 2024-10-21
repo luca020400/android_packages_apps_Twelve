@@ -7,6 +7,8 @@ package org.lineageos.twelve.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,12 +19,14 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.navigation.NavigationBarView
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.lineageos.twelve.R
 import org.lineageos.twelve.ext.getViewProperty
+import org.lineageos.twelve.ext.isLandscape
+import org.lineageos.twelve.ext.updatePadding
 import org.lineageos.twelve.models.RequestStatus
 import org.lineageos.twelve.ui.views.NowPlayingBar
 import org.lineageos.twelve.viewmodels.NowPlayingViewModel
@@ -37,7 +41,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private val providersViewModel by viewModels<ProvidersViewModel>()
 
     // Views
-    private val bottomNavigationView by getViewProperty<BottomNavigationView>(R.id.bottomNavigationView)
+    private val navigationBarView by getViewProperty<NavigationBarView>(R.id.navigationBarView)
     private val nowPlayingBar by getViewProperty<NowPlayingBar>(R.id.nowPlayingBar)
     private val providerMaterialButton by getViewProperty<MaterialButton>(R.id.providerMaterialButton)
     private val toolbar by getViewProperty<MaterialToolbar>(R.id.toolbar)
@@ -49,13 +53,56 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
-                bottomNavigationView.menu.getItem(position).isChecked = true
+                navigationBarView.menu.getItem(position).isChecked = true
             }
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Insets
+        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
+
+            v.updatePadding(
+                insets,
+                start = !resources.configuration.isLandscape,
+                end = true,
+            )
+
+            windowInsets
+        }
+
+        if (resources.configuration.isLandscape) {
+            ViewCompat.setOnApplyWindowInsetsListener(navigationBarView) { v, windowInsets ->
+                // This is a navigation rail
+                val insets = windowInsets.getInsets(
+                    WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+                )
+
+                v.updatePadding(
+                    insets,
+                    start = true,
+                    top = true,
+                    bottom = true,
+                )
+
+                windowInsets
+            }
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(viewPager2) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
+
+            v.updatePadding(
+                insets,
+                start = !resources.configuration.isLandscape,
+                end = true,
+            )
+
+            windowInsets
+        }
 
         toolbar.setupWithNavController(findNavController())
 
@@ -73,7 +120,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewPager2.offscreenPageLimit = fragments.size
         viewPager2.registerOnPageChangeCallback(onPageChangeCallback)
 
-        bottomNavigationView.setOnItemSelectedListener { item ->
+        navigationBarView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.activityFragment -> {
                     viewPager2.currentItem = 0
