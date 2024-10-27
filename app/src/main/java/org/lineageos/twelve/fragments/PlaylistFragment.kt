@@ -14,7 +14,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import androidx.core.view.updatePadding
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -33,6 +32,7 @@ import org.lineageos.twelve.R
 import org.lineageos.twelve.ext.getParcelable
 import org.lineageos.twelve.ext.getViewProperty
 import org.lineageos.twelve.ext.setProgressCompat
+import org.lineageos.twelve.ext.updatePadding
 import org.lineageos.twelve.models.Audio
 import org.lineageos.twelve.models.RequestStatus
 import org.lineageos.twelve.ui.dialogs.EditTextMaterialAlertDialogBuilder
@@ -52,6 +52,7 @@ class PlaylistFragment : Fragment(R.layout.fragment_playlist) {
     private val viewModel by viewModels<PlaylistViewModel>()
 
     // Views
+    private val infoNestedScrollView by getViewProperty<NestedScrollView?>(R.id.infoNestedScrollView)
     private val linearProgressIndicator by getViewProperty<LinearProgressIndicator>(R.id.linearProgressIndicator)
     private val noElementsNestedScrollView by getViewProperty<NestedScrollView>(R.id.noElementsNestedScrollView)
     private val playlistNameTextView by getViewProperty<TextView>(R.id.playlistNameTextView)
@@ -114,13 +115,37 @@ class PlaylistFragment : Fragment(R.layout.fragment_playlist) {
         super.onViewCreated(view, savedInstanceState)
 
         // Insets
+        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
+
+            v.updatePadding(
+                insets,
+                start = true,
+                end = true,
+            )
+
+            windowInsets
+        }
+
+        infoNestedScrollView?.let {
+            ViewCompat.setOnApplyWindowInsetsListener(it) { v, windowInsets ->
+                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+                v.updatePadding(
+                    insets,
+                    bottom = true,
+                )
+
+                windowInsets
+            }
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(recyclerView) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 
             v.updatePadding(
-                left = insets.left,
-                right = insets.right,
-                bottom = insets.bottom,
+                insets,
+                bottom = true,
             )
 
             windowInsets
@@ -130,9 +155,8 @@ class PlaylistFragment : Fragment(R.layout.fragment_playlist) {
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 
             v.updatePadding(
-                left = insets.left,
-                right = insets.right,
-                bottom = insets.bottom,
+                insets,
+                bottom = true,
             )
 
             windowInsets

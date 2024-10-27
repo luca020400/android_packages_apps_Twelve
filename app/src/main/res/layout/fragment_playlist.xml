@@ -63,31 +63,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+            <include
+                layout="@layout/playlist_labels"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="8dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/playlistNameTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:textAppearance="?attr/textAppearanceHeadlineMedium"
-                    tools:text="Eyes shut, mouth still" />
-
-                <TextView
-                    android:id="@+id/tracksInfoTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?attr/textAppearanceLabelLarge"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    tools:text="7 tracks, 51 minutes" />
-
-            </LinearLayout>
+                android:layout_marginVertical="8dp" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
@@ -102,42 +84,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <include
+        layout="@layout/playlist_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:visibility="gone"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:spanCount="1" />
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/noElementsNestedScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:visibility="gone"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            style="@style/Theme.Twelve.NoElements.LinearLayout"
-            android:layout_gravity="center">
-
-            <ImageView
-                style="@style/Theme.Twelve.NoElements.ImageView"
-                android:contentDescription="@string/no_audios"
-                android:src="@drawable/ic_music_note" />
-
-            <Space style="@style/Theme.Twelve.NoElements.Space" />
-
-            <TextView
-                style="@style/Theme.Twelve.NoElements.TextView"
-                android:text="@string/no_audios" />
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/linearProgressIndicator"
