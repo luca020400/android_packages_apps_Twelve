@@ -21,8 +21,7 @@
             style="?attr/collapsingToolbarLayoutLargeStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:expandedTitleMarginBottom="28dp"
-            app:expandedTitleTextAppearance="?attr/textAppearanceHeadlineMedium"
+            app:expandedTitleTextColor="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:maxLines="3">
 
@@ -64,6 +63,14 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <include
+                layout="@layout/artist_labels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="28dp"
+                android:layout_marginHorizontal="16dp" />
+
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -77,131 +84,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <include
+        layout="@layout/artist_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/albumsLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:orientation="vertical"
-                android:paddingTop="16dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
-                    android:paddingHorizontal="16dp"
-                    android:text="@string/artist_albums_header"
-                    android:textAppearance="?attr/textAppearanceTitleLarge" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/albumsRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="1" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/appearsInAlbumLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:orientation="vertical"
-                android:paddingTop="16dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
-                    android:paddingHorizontal="16dp"
-                    android:text="@string/artist_appears_in_album_header"
-                    android:textAppearance="?attr/textAppearanceTitleLarge" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/appearsInAlbumRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="1" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/appearsInPlaylistLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:orientation="vertical"
-                android:paddingTop="16dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
-                    android:paddingHorizontal="16dp"
-                    android:text="@string/artist_appears_in_playlist_header"
-                    android:textAppearance="?attr/textAppearanceTitleLarge" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/appearsInPlaylistRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="1" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/noElementsNestedScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            style="@style/Theme.Twelve.NoElements.LinearLayout"
-            android:layout_gravity="center">
-
-            <ImageView
-                style="@style/Theme.Twelve.NoElements.ImageView"
-                android:contentDescription="@string/no_albums"
-                android:src="@drawable/ic_album" />
-
-            <Space style="@style/Theme.Twelve.NoElements.Space" />
-
-            <TextView
-                style="@style/Theme.Twelve.NoElements.TextView"
-                android:text="@string/no_albums" />
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/linearProgressIndicator"

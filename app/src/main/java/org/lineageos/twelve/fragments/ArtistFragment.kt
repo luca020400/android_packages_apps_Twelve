@@ -11,11 +11,11 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import androidx.core.view.updatePadding
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -34,6 +34,7 @@ import org.lineageos.twelve.R
 import org.lineageos.twelve.ext.getParcelable
 import org.lineageos.twelve.ext.getViewProperty
 import org.lineageos.twelve.ext.setProgressCompat
+import org.lineageos.twelve.ext.updatePadding
 import org.lineageos.twelve.models.Album
 import org.lineageos.twelve.models.Playlist
 import org.lineageos.twelve.models.RequestStatus
@@ -58,6 +59,8 @@ class ArtistFragment : Fragment(R.layout.fragment_artist) {
     private val appearsInAlbumRecyclerView by getViewProperty<RecyclerView>(R.id.appearsInAlbumRecyclerView)
     private val appearsInPlaylistLinearLayout by getViewProperty<LinearLayout>(R.id.appearsInPlaylistLinearLayout)
     private val appearsInPlaylistRecyclerView by getViewProperty<RecyclerView>(R.id.appearsInPlaylistRecyclerView)
+    private val artistNameTextView by getViewProperty<TextView>(R.id.artistNameTextView)
+    private val infoNestedScrollView by getViewProperty<NestedScrollView?>(R.id.infoNestedScrollView)
     private val linearProgressIndicator by getViewProperty<LinearProgressIndicator>(R.id.linearProgressIndicator)
     private val nestedScrollView by getViewProperty<NestedScrollView>(R.id.nestedScrollView)
     private val noElementsNestedScrollView by getViewProperty<NestedScrollView>(R.id.noElementsNestedScrollView)
@@ -126,13 +129,37 @@ class ArtistFragment : Fragment(R.layout.fragment_artist) {
         super.onViewCreated(view, savedInstanceState)
 
         // Insets
+        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
+
+            v.updatePadding(
+                insets,
+                start = true,
+                end = true,
+            )
+
+            windowInsets
+        }
+
+        infoNestedScrollView?.let {
+            ViewCompat.setOnApplyWindowInsetsListener(it) { v, windowInsets ->
+                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+                v.updatePadding(
+                    insets,
+                    bottom = true,
+                )
+
+                windowInsets
+            }
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(nestedScrollView) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 
             v.updatePadding(
-                left = insets.left,
-                right = insets.right,
-                bottom = insets.bottom,
+                insets,
+                bottom = true,
             )
 
             windowInsets
@@ -142,9 +169,8 @@ class ArtistFragment : Fragment(R.layout.fragment_artist) {
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 
             v.updatePadding(
-                left = insets.left,
-                right = insets.right,
-                bottom = insets.bottom,
+                insets,
+                bottom = true,
             )
 
             windowInsets
@@ -188,6 +214,7 @@ class ArtistFragment : Fragment(R.layout.fragment_artist) {
                     val (artist, artistWorks) = it.data
 
                     toolbar.title = artist.name
+                    artistNameTextView.text = artist.name
 
                     artist.thumbnail?.uri?.also { uri ->
                         thumbnailImageView.load(uri)
