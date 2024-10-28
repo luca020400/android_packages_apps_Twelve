@@ -42,10 +42,22 @@ class HorizontalListItem @JvmOverloads constructor(
             headlineTextView.setTextAndUpdateVisibility(value)
         }
 
+    var headlineMaxLines: Int
+        get() = headlineTextView.maxLines
+        set(value) {
+            headlineTextView.maxLines = value
+        }
+
     var supportingText: CharSequence?
         get() = supportingTextView.text
         set(value) {
             supportingTextView.setTextAndUpdateVisibility(value)
+        }
+
+    var supportingMaxLines: Int
+        get() = supportingTextView.maxLines
+        set(value) {
+            supportingTextView.maxLines = value
         }
 
     init {
