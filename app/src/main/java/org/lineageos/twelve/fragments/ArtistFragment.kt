@@ -92,6 +92,7 @@ class ArtistFragment : Fragment(R.layout.fragment_artist) {
                 } ?: view.setThumbnailImage(R.drawable.ic_album)
 
                 view.headlineText = item.title
+                view.headlineMaxLines = 2
                 view.supportingText = item.year?.toString()
             }
         }
