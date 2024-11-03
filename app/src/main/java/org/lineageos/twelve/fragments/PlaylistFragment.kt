@@ -25,6 +25,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -32,6 +33,7 @@ import org.lineageos.twelve.R
 import org.lineageos.twelve.ext.getParcelable
 import org.lineageos.twelve.ext.getViewProperty
 import org.lineageos.twelve.ext.setProgressCompat
+import org.lineageos.twelve.ext.updateMargin
 import org.lineageos.twelve.ext.updatePadding
 import org.lineageos.twelve.models.Audio
 import org.lineageos.twelve.models.RequestStatus
@@ -55,6 +57,7 @@ class PlaylistFragment : Fragment(R.layout.fragment_playlist) {
     private val infoNestedScrollView by getViewProperty<NestedScrollView?>(R.id.infoNestedScrollView)
     private val linearProgressIndicator by getViewProperty<LinearProgressIndicator>(R.id.linearProgressIndicator)
     private val noElementsNestedScrollView by getViewProperty<NestedScrollView>(R.id.noElementsNestedScrollView)
+    private val playAllFloatingActionButton by getViewProperty<FloatingActionButton>(R.id.playAllFloatingActionButton)
     private val playlistNameTextView by getViewProperty<TextView>(R.id.playlistNameTextView)
     private val recyclerView by getViewProperty<RecyclerView>(R.id.recyclerView)
     private val toolbar by getViewProperty<MaterialToolbar>(R.id.toolbar)
@@ -70,7 +73,7 @@ class PlaylistFragment : Fragment(R.layout.fragment_playlist) {
                 view.setLeadingIconImage(R.drawable.ic_music_note)
                 view.setOnClickListener {
                     item?.let {
-                        viewModel.playAudio(currentList, bindingAdapterPosition)
+                        viewModel.playPlaylist(bindingAdapterPosition)
 
                         findNavController().navigate(
                             R.id.action_playlistFragment_to_fragment_now_playing
@@ -162,6 +165,17 @@ class PlaylistFragment : Fragment(R.layout.fragment_playlist) {
             windowInsets
         }
 
+        ViewCompat.setOnApplyWindowInsetsListener(playAllFloatingActionButton) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            v.updateMargin(
+                insets,
+                bottom = true,
+            )
+
+            windowInsets
+        }
+
         toolbar.setupWithNavController(findNavController())
         toolbar.inflateMenu(R.menu.fragment_podcast_toolbar)
         toolbar.setOnMenuItemClickListener {
@@ -181,6 +195,12 @@ class PlaylistFragment : Fragment(R.layout.fragment_playlist) {
         }
 
         recyclerView.adapter = adapter
+
+        playAllFloatingActionButton.setOnClickListener {
+            viewModel.playPlaylist()
+
+            findNavController().navigate(R.id.action_playlistFragment_to_fragment_now_playing)
+        }
 
         viewModel.loadPlaylist(playlistUri)
 
@@ -239,6 +259,10 @@ class PlaylistFragment : Fragment(R.layout.fragment_playlist) {
                     val isEmpty = audios.isEmpty()
                     recyclerView.isVisible = !isEmpty
                     noElementsNestedScrollView.isVisible = isEmpty
+                    when (isEmpty) {
+                        true -> playAllFloatingActionButton.hide()
+                        false -> playAllFloatingActionButton.show()
+                    }
                 }
 
                 is RequestStatus.Error -> {
@@ -251,6 +275,7 @@ class PlaylistFragment : Fragment(R.layout.fragment_playlist) {
 
                     recyclerView.isVisible = false
                     noElementsNestedScrollView.isVisible = true
+                    playAllFloatingActionButton.isVisible = false
 
                     if (it.type == RequestStatus.Error.Type.NOT_FOUND) {
                         // Get out of here
