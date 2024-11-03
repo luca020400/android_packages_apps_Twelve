@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory
 import androidx.lifecycle.viewModelScope
 import androidx.media3.common.C
 import androidx.media3.common.MediaMetadata
-import androidx.media3.common.MimeTypes
 import androidx.media3.common.util.UnstableApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -47,6 +46,7 @@ import org.lineageos.twelve.models.PlaybackState
 import org.lineageos.twelve.models.RepeatMode
 import org.lineageos.twelve.models.RequestStatus
 import org.lineageos.twelve.models.Thumbnail
+import org.lineageos.twelve.utils.MimeUtils
 
 open class NowPlayingViewModel(application: Application) : TwelveViewModel(application) {
     enum class PlaybackSpeed(val value: Float) {
@@ -221,11 +221,7 @@ open class NowPlayingViewModel(application: Application) : TwelveViewModel(appli
     val displayFileType = mimeType
         .mapLatest { mimeType ->
             mimeType?.let {
-                MimeTypes.normalizeMimeType(it)
-            }?.let {
-                it.takeIf { it.contains('/') }
-                    ?.substringAfterLast('/')
-                    ?.uppercase()
+                MimeUtils.mimeTypeToDisplayName(it)
             }
         }
         .flowOn(Dispatchers.IO)
