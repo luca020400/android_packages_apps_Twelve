@@ -30,6 +30,7 @@ import org.lineageos.twelve.models.Artist
 import org.lineageos.twelve.models.ArtistWorks
 import org.lineageos.twelve.models.Audio
 import org.lineageos.twelve.models.Genre
+import org.lineageos.twelve.models.MediaType
 import org.lineageos.twelve.models.Playlist
 import org.lineageos.twelve.models.RequestStatus
 import org.lineageos.twelve.models.Thumbnail
@@ -192,6 +193,19 @@ class LocalDataSource(context: Context, private val database: TwelveDatabase) : 
         playlistsBaseUri,
     ).any {
         mediaItemUri.toString().startsWith(it.toString())
+    }
+
+    override suspend fun mediaTypeOf(mediaItemUri: Uri) = with(mediaItemUri.toString()) {
+        when {
+            startsWith(albumsUri.toString()) -> MediaType.ALBUM
+            startsWith(artistsUri.toString()) -> MediaType.ARTIST
+            startsWith(genresUri.toString()) -> MediaType.GENRE
+            startsWith(audiosUri.toString()) -> MediaType.AUDIO
+            startsWith(playlistsBaseUri.toString()) -> MediaType.PLAYLIST
+            else -> null
+        }?.let {
+            RequestStatus.Success<_, MediaError>(it)
+        } ?: RequestStatus.Error(MediaError.NOT_FOUND)
     }
 
     override fun albums() = contentResolver.queryFlow(

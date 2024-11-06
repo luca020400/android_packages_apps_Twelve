@@ -13,6 +13,7 @@ import org.lineageos.twelve.models.ArtistWorks
 import org.lineageos.twelve.models.Audio
 import org.lineageos.twelve.models.Genre
 import org.lineageos.twelve.models.MediaItem
+import org.lineageos.twelve.models.MediaType
 import org.lineageos.twelve.models.Playlist
 import org.lineageos.twelve.models.RequestStatus
 
@@ -29,6 +30,14 @@ interface MediaDataSource {
      * @return Whether this data source can handle the given media item
      */
     fun isMediaItemCompatible(mediaItemUri: Uri): Boolean
+
+    /**
+     * Given a compatible media item URI, get its type.
+     *
+     * @param mediaItemUri The media item to check
+     * @return [RequestStatus.Success] if success, [RequestStatus.Error] with an error otherwise
+     */
+    suspend fun mediaTypeOf(mediaItemUri: Uri): MediaRequestStatus<MediaType>
 
     /**
      * Get all the albums. All albums must have at least one audio associated with them.
