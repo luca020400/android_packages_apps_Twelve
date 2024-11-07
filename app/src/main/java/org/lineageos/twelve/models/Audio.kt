@@ -71,6 +71,8 @@ data class Audio(
         RECORDING(MediaMetadata.MEDIA_TYPE_MUSIC),
     }
 
+    override val mediaType = MediaType.AUDIO
+
     override fun areContentsTheSame(other: Audio) = compareValuesBy(
         this, other,
         Audio::mimeType,
