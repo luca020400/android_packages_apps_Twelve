@@ -93,6 +93,7 @@ dependencies {
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.preference)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)

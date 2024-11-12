@@ -139,6 +139,9 @@
     <string name="argument_validation_error_message">Error while parsing the following arguments:\n%1$s</string>
     <string name="argument_validation_error_item">%1$s: %2$s</string>
 
+    <!-- Settings title -->
+    <string name="title_activity_settings">Settings</string>
+
     <!-- Now playing widget -->
     <string name="now_playing_widget_description">Now playing</string>
     <string name="now_playing_widget_dummy_title">Title</string>
