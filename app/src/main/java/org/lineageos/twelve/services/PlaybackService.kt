@@ -8,6 +8,7 @@ package org.lineageos.twelve.services
 import android.app.PendingIntent
 import android.content.Intent
 import android.media.audiofx.AudioEffect
+import android.os.Bundle
 import android.os.IBinder
 import androidx.annotation.OptIn
 import androidx.lifecycle.Lifecycle
@@ -23,9 +24,12 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.DefaultMediaNotificationProvider
 import androidx.media3.session.LibraryResult
+import androidx.media3.session.MediaController
 import androidx.media3.session.MediaLibraryService
 import androidx.media3.session.MediaSession
+import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionError
+import androidx.media3.session.SessionResult
 import androidx.preference.PreferenceManager
 import kotlinx.coroutines.guava.future
 import kotlinx.coroutines.launch
@@ -39,6 +43,27 @@ import org.lineageos.twelve.ui.widgets.NowPlayingAppWidgetProvider
 
 @OptIn(UnstableApi::class)
 class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
+    enum class CustomCommand(val value: String, extras: Bundle) {
+        /**
+         * Toggles audio offload mode.
+         *
+         * Arguments:
+         * - [ARG_VALUE] ([Boolean]): Whether to enable or disable offload
+         */
+        TOGGLE_OFFLOAD("toggle_offload", Bundle.EMPTY);
+
+        val sessionCommand = SessionCommand(value, extras)
+
+        companion object {
+            const val ARG_VALUE = "value"
+
+            fun MediaController.sendCustomCommand(
+                customCommand: CustomCommand,
+                extras: Bundle
+            ) = sendCustomCommand(customCommand.sessionCommand, extras)
+        }
+    }
+
     private val dispatcher = ServiceLifecycleDispatcher(this)
     override val lifecycle: Lifecycle
         get() = dispatcher.lifecycle
@@ -61,6 +86,23 @@ class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
     }
 
     private val mediaLibrarySessionCallback = object : MediaLibrarySession.Callback {
+        override fun onConnect(
+            session: MediaSession,
+            controller: MediaSession.ControllerInfo
+        ): MediaSession.ConnectionResult {
+            val sessionCommands = MediaSession.ConnectionResult.DEFAULT_SESSION_COMMANDS.buildUpon()
+                .apply {
+                    for (command in CustomCommand.entries) {
+                        add(command.sessionCommand)
+                    }
+                }
+                .build()
+
+            return MediaSession.ConnectionResult.AcceptedResultBuilder(session)
+                .setAvailableSessionCommands(sessionCommands)
+                .build()
+        }
+
         override fun onPlaybackResumption(
             mediaSession: MediaSession,
             controller: MediaSession.ControllerInfo
@@ -182,6 +224,25 @@ class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
             params: LibraryParams?,
         ) = lifecycle.coroutineScope.future {
             LibraryResult.ofItemList(mediaRepositoryTree.search(query), params)
+        }
+
+        override fun onCustomCommand(
+            session: MediaSession,
+            controller: MediaSession.ControllerInfo,
+            customCommand: SessionCommand,
+            args: Bundle
+        ) = lifecycle.coroutineScope.future {
+            when (customCommand.customAction) {
+                CustomCommand.TOGGLE_OFFLOAD.value -> {
+                    args.getBoolean(CustomCommand.ARG_VALUE).let {
+                        mediaLibrarySession?.player?.setOffloadEnabled(it)
+                    }
+
+                    SessionResult(SessionResult.RESULT_SUCCESS)
+                }
+
+                else -> SessionResult(SessionError.ERROR_NOT_SUPPORTED)
+            }
         }
     }
 
