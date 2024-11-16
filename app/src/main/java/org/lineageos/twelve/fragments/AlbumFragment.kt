@@ -277,7 +277,10 @@ class AlbumFragment : Fragment(R.layout.fragment_album) {
                                     placeholder = R.drawable.ic_album
                                 )
                             } ?: album.thumbnail?.bitmap?.also { bitmap ->
-                                thumbnailImageView.load(bitmap)
+                                thumbnailImageView.loadThumbnail(
+                                    bitmap,
+                                    placeholder = R.drawable.ic_album
+                                )
                             } ?: thumbnailImageView.setImageResource(R.drawable.ic_album)
 
                             artistNameTextView.text = album.artistName

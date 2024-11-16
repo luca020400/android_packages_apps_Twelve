@@ -224,7 +224,10 @@ class ArtistFragment : Fragment(R.layout.fragment_artist) {
                             placeholder = R.drawable.ic_person
                         )
                     } ?: artist.thumbnail?.bitmap?.also { bitmap ->
-                        thumbnailImageView.load(bitmap)
+                        thumbnailImageView.loadThumbnail(
+                            bitmap,
+                            placeholder = R.drawable.ic_person
+                        )
                     } ?: thumbnailImageView.setImageResource(R.drawable.ic_person)
 
                     albumsAdapter.submitList(artistWorks.albums)
