@@ -70,13 +70,7 @@ class LocalDataSource(context: Context, private val database: TwelveDatabase) : 
         val uri = ContentUris.withAppendedId(albumsUri, albumId)
         val artistUri = ContentUris.withAppendedId(artistsUri, artistId)
 
-        val thumbnail = runCatching {
-            contentResolver.loadThumbnail(
-                uri, Size(512, 512), null
-            )
-        }.getOrNull()?.let {
-            Thumbnail(bitmap = it, type = Thumbnail.Type.FRONT_COVER)
-        }
+        val thumbnail = Thumbnail(uri = uri, type = Thumbnail.Type.FRONT_COVER)
 
         Album(
             uri,
@@ -96,13 +90,7 @@ class LocalDataSource(context: Context, private val database: TwelveDatabase) : 
 
         val uri = ContentUris.withAppendedId(artistsUri, artistId)
 
-        val thumbnail = runCatching {
-            contentResolver.loadThumbnail(
-                uri, Size(512, 512), null
-            )
-        }.getOrNull()?.let {
-            Thumbnail(bitmap = it, type = Thumbnail.Type.BAND_ARTIST_LOGO)
-        }
+        val thumbnail = Thumbnail(uri = uri, type = Thumbnail.Type.BAND_ARTIST_LOGO)
 
         Artist(
             uri,
