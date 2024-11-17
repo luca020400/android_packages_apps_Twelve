@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.lineageos.twelve.R
 import org.lineageos.twelve.ext.getViewProperty
+import org.lineageos.twelve.ext.navigateSafe
 import org.lineageos.twelve.ext.setProgressCompat
 import org.lineageos.twelve.models.ActivityTab
 import org.lineageos.twelve.models.Album
@@ -58,27 +59,27 @@ class ActivityFragment : Fragment(R.layout.fragment_activity) {
             override fun ViewHolder.onPrepareView() {
                 view.setOnItemClickListener { items, position ->
                     when (val item = items[position]) {
-                        is Album -> findNavController().navigate(
+                        is Album -> findNavController().navigateSafe(
                             R.id.action_mainFragment_to_fragment_album,
                             AlbumFragment.createBundle(item.uri)
                         )
 
-                        is Artist -> findNavController().navigate(
+                        is Artist -> findNavController().navigateSafe(
                             R.id.action_mainFragment_to_fragment_artist,
                             ArtistFragment.createBundle(item.uri)
                         )
 
-                        is Audio -> findNavController().navigate(
+                        is Audio -> findNavController().navigateSafe(
                             R.id.action_mainFragment_to_fragment_audio_bottom_sheet_dialog,
                             AudioBottomSheetDialogFragment.createBundle(item.uri)
                         )
 
-                        is Genre -> findNavController().navigate(
+                        is Genre -> findNavController().navigateSafe(
                             R.id.action_mainFragment_to_fragment_genre,
                             GenreFragment.createBundle(item.uri)
                         )
 
-                        is Playlist -> findNavController().navigate(
+                        is Playlist -> findNavController().navigateSafe(
                             R.id.action_mainFragment_to_fragment_playlist,
                             PlaylistFragment.createBundle(item.uri)
                         )
