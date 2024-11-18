@@ -182,4 +182,9 @@
     <string name="sort_by_release_date">Release date</string>
     <string name="sort_by_title">Title</string>
     <string name="sort_by_unknown">Unknown</string>
+
+    <!-- Activities -->
+    <string name="activity_most_played_albums">Most played albums</string>
+    <string name="activity_random_albums">Random albums</string>
+    <string name="activity_random_songs">Random songs</string>
 </resources>

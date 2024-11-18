@@ -18,12 +18,14 @@ import org.lineageos.twelve.datasources.subsonic.models.AlbumID3
 import org.lineageos.twelve.datasources.subsonic.models.ArtistID3
 import org.lineageos.twelve.datasources.subsonic.models.Child
 import org.lineageos.twelve.datasources.subsonic.models.Error
+import org.lineageos.twelve.models.ActivityTab
 import org.lineageos.twelve.models.Album
 import org.lineageos.twelve.models.Artist
 import org.lineageos.twelve.models.ArtistWorks
 import org.lineageos.twelve.models.Audio
 import org.lineageos.twelve.models.Genre
 import org.lineageos.twelve.models.GenreContent
+import org.lineageos.twelve.models.LocalizedString
 import org.lineageos.twelve.models.MediaType
 import org.lineageos.twelve.models.Playlist
 import org.lineageos.twelve.models.ProviderArgument
@@ -86,6 +88,59 @@ class SubsonicDataSource(arguments: Bundle) : MediaDataSource {
             RequestStatus.Success<_, MediaError>(it)
         } ?: RequestStatus.Error(MediaError.NOT_FOUND)
     }
+
+    override fun activity() = suspend {
+        val mostPlayedAlbums = subsonicClient.getAlbumList2(
+            "frequent",
+            10
+        ).toRequestStatus {
+            ActivityTab(
+                "most_played_albums",
+                LocalizedString(
+                    "Most played albums",
+                    R.string.activity_most_played_albums,
+                ),
+                album.sortedByDescending { it.playCount }.map { it.toMediaItem() }
+            )
+        }
+
+        val randomAlbums = subsonicClient.getAlbumList2(
+            "random",
+            10
+        ).toRequestStatus {
+            ActivityTab(
+                "random_albums",
+                LocalizedString(
+                    "Random albums",
+                    R.string.activity_random_albums,
+                ),
+                album.map { it.toMediaItem() }
+            )
+        }
+
+        val randomSongs = subsonicClient.getRandomSongs(20).toRequestStatus {
+            ActivityTab(
+                "random_songs",
+                LocalizedString(
+                    "Random songs",
+                    R.string.activity_random_songs,
+                ),
+                song.map { it.toMediaItem() }
+            )
+        }
+
+        RequestStatus.Success<_, MediaError>(
+            listOf(
+                mostPlayedAlbums,
+                randomAlbums,
+                randomSongs,
+            ).mapNotNull {
+                (it as? RequestStatus.Success)?.data?.takeIf { activityTab ->
+                    activityTab.items.isNotEmpty()
+                }
+            }
+        )
+    }.asFlow()
 
     override fun albums(sortingRule: SortingRule) = suspend {
         subsonicClient.getAlbumList2(
