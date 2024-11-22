@@ -277,10 +277,6 @@ class NowPlayingFragment : Fragment(R.layout.fragment_now_playing) {
         visualizerMaterialButton.setOnClickListener {
             viewModel.nextVisualizerType()
         }
-        visualizerMaterialButton.setOnLongClickListener {
-            viewModel.disableVisualizer()
-            true
-        }
 
         queueMaterialButton.setOnClickListener {
             findNavController().navigateSafe(R.id.action_nowPlayingFragment_to_fragment_queue)

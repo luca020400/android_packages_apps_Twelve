@@ -333,8 +333,4 @@ open class NowPlayingViewModel(application: Application) : TwelveViewModel(appli
     fun nextVisualizerType() {
         _currentVisualizerType.value = _currentVisualizerType.value.next()
     }
-
-    fun disableVisualizer() {
-        _currentVisualizerType.value = VisualizerType.NONE
-    }
 }
