@@ -276,17 +276,10 @@ class AlbumFragment : Fragment(R.layout.fragment_album) {
                             toolbar.title = album.title
                             albumTitleTextView.text = album.title
 
-                            album.thumbnail?.uri?.also { uri ->
-                                thumbnailImageView.loadThumbnail(
-                                    uri,
-                                    placeholder = R.drawable.ic_album
-                                )
-                            } ?: album.thumbnail?.bitmap?.also { bitmap ->
-                                thumbnailImageView.loadThumbnail(
-                                    bitmap,
-                                    placeholder = R.drawable.ic_album
-                                )
-                            } ?: thumbnailImageView.setImageResource(R.drawable.ic_album)
+                            thumbnailImageView.loadThumbnail(
+                                album.thumbnail,
+                                placeholder = R.drawable.ic_album
+                            )
 
                             artistNameTextView.text = album.artistName
                             artistNameTextView.setOnClickListener {

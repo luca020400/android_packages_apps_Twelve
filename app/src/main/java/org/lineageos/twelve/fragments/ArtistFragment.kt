@@ -87,11 +87,7 @@ class ArtistFragment : Fragment(R.layout.fragment_artist) {
             }
 
             override fun ViewHolder.onBindView(item: Album) {
-                item.thumbnail?.uri?.also { uri ->
-                    view.loadThumbnailImage(uri, R.drawable.ic_album)
-                } ?: item.thumbnail?.bitmap?.also { bitmap ->
-                    view.loadThumbnailImage(bitmap)
-                } ?: view.setThumbnailImage(R.drawable.ic_album)
+                view.loadThumbnailImage(item.thumbnail, R.drawable.ic_album)
 
                 view.headlineText = item.title
                 view.headlineMaxLines = 2
@@ -219,17 +215,10 @@ class ArtistFragment : Fragment(R.layout.fragment_artist) {
                     toolbar.title = artist.name
                     artistNameTextView.text = artist.name
 
-                    artist.thumbnail?.uri?.also { uri ->
-                        thumbnailImageView.loadThumbnail(
-                            uri,
-                            placeholder = R.drawable.ic_person
-                        )
-                    } ?: artist.thumbnail?.bitmap?.also { bitmap ->
-                        thumbnailImageView.loadThumbnail(
-                            bitmap,
-                            placeholder = R.drawable.ic_person
-                        )
-                    } ?: thumbnailImageView.setImageResource(R.drawable.ic_person)
+                    thumbnailImageView.loadThumbnail(
+                        artist.thumbnail,
+                        placeholder = R.drawable.ic_person
+                    )
 
                     albumsAdapter.submitList(artistWorks.albums)
                     appearsInAlbumAdapter.submitList(artistWorks.appearsInAlbum)

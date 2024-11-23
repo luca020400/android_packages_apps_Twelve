@@ -6,7 +6,6 @@
 package org.lineageos.twelve.ui.views
 
 import android.content.Context
-import android.graphics.ImageDecoder
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.ImageButton
@@ -21,6 +20,7 @@ import androidx.media3.common.MediaMetadata
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import org.lineageos.twelve.R
+import org.lineageos.twelve.ext.loadThumbnail
 import org.lineageos.twelve.ext.slideDown
 import org.lineageos.twelve.ext.slideUp
 import org.lineageos.twelve.models.Thumbnail
@@ -126,18 +126,7 @@ class NowPlayingBar @JvmOverloads constructor(
     }
 
     fun updateMediaArtwork(artwork: Thumbnail?) {
-        artwork?.bitmap?.also { bitmap ->
-            thumbnailImageView.setImageBitmap(bitmap)
-        } ?: artwork?.uri?.also { artworkUri ->
-            ImageDecoder.createSource(
-                context.contentResolver,
-                artworkUri
-            ).let { source ->
-                ImageDecoder.decodeBitmap(source)
-            }.also { bitmap ->
-                thumbnailImageView.setImageBitmap(bitmap)
-            }
-        } ?: thumbnailImageView.setImageResource(R.drawable.ic_music_note)
+        thumbnailImageView.loadThumbnail(artwork, placeholder = R.drawable.ic_music_note)
     }
 
     fun updateDurationCurrentPositionMs(durationMs: Long?, currentPositionMs: Long?) {

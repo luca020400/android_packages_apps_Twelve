@@ -69,11 +69,7 @@ class ActivityTabItem @JvmOverloads constructor(
                 subheadText = item.artistName
                 supportingText = item.year?.toString()
 
-                item.thumbnail?.uri?.let {
-                    loadThumbnailImage(it, R.drawable.ic_album)
-                } ?: item.thumbnail?.bitmap?.let {
-                    loadThumbnailImage(it, R.drawable.ic_album)
-                } ?: setPlaceholderImage(R.drawable.ic_album)
+                loadThumbnailImage(item.thumbnail, R.drawable.ic_album)
             }
 
             is Artist -> {
@@ -81,11 +77,7 @@ class ActivityTabItem @JvmOverloads constructor(
                 subheadText = null
                 supportingText = null
 
-                item.thumbnail?.uri?.let {
-                    loadThumbnailImage(it)
-                } ?: item.thumbnail?.bitmap?.let {
-                    loadThumbnailImage(it)
-                } ?: setPlaceholderImage(R.drawable.ic_person)
+                loadThumbnailImage(item.thumbnail, R.drawable.ic_person)
             }
 
             is Audio -> {
