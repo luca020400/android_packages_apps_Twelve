@@ -90,7 +90,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
-                navigationBarView.menu.getItem(position).isChecked = true
+                var offset = 0
+
+                // Search button
+                if (position >= 1) {
+                    offset += 1
+                }
+
+                navigationBarView.menu.getItem(position + offset).isChecked = true
             }
         }
     }
