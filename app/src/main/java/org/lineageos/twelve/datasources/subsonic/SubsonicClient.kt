@@ -1164,8 +1164,9 @@ class SubsonicClient(
             .build()
     ).executeAsync().let { response ->
         when (response.isSuccessful) {
-            true -> response.body?.string()?.let {
-                val subsonicResponse = Json.decodeFromString<ResponseRoot>(it).subsonicResponse
+            true -> response.body?.use { body ->
+                val subsonicResponse =
+                    Json.decodeFromString<ResponseRoot>(body.string()).subsonicResponse
 
                 when (subsonicResponse.status) {
                     ResponseStatus.OK -> MethodResult.Success(
