@@ -299,7 +299,7 @@ class AlbumFragment : Fragment(R.layout.fragment_album) {
                             val totalDurationMs = audios.sumOf { audio ->
                                 audio.durationMs
                             }
-                            val totalDurationMinutes = totalDurationMs / 1000 / 60
+                            val totalDurationMinutes = (totalDurationMs / 1000 / 60).toInt()
 
                             val tracksCount = resources.getQuantityString(
                                 R.plurals.tracks_count,

@@ -113,7 +113,7 @@ class LocalDataSource(context: Context, private val database: TwelveDatabase) : 
         val isMusic = columnIndexCache.getBoolean(MediaStore.Audio.AudioColumns.IS_MUSIC)
         val isPodcast = columnIndexCache.getBoolean(MediaStore.Audio.AudioColumns.IS_PODCAST)
         val isAudiobook = columnIndexCache.getBoolean(MediaStore.Audio.AudioColumns.IS_AUDIOBOOK)
-        val duration = columnIndexCache.getInt(MediaStore.Audio.AudioColumns.DURATION)
+        val duration = columnIndexCache.getLong(MediaStore.Audio.AudioColumns.DURATION)
         val artistId = columnIndexCache.getLong(MediaStore.Audio.AudioColumns.ARTIST_ID)
         val artist = columnIndexCache.getString(MediaStore.Audio.AudioColumns.ARTIST)
         val albumId = columnIndexCache.getLong(MediaStore.Audio.AudioColumns.ALBUM_ID)

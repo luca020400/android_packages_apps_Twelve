@@ -36,7 +36,7 @@ data class Audio(
     val mimeType: String,
     val title: String,
     val type: Type,
-    val durationMs: Int,
+    val durationMs: Long,
     val artistUri: Uri,
     val artistName: String,
     val albumUri: Uri,
@@ -103,7 +103,7 @@ data class Audio(
         mimeType = mimeType,
         discNumber = discNumber,
         trackNumber = trackNumber,
-        durationMs = durationMs.toLong(),
+        durationMs = durationMs,
     )
 
     companion object {

@@ -381,7 +381,7 @@ class SubsonicDataSource(arguments: Bundle) : MediaDataSource {
         mimeType = contentType ?: "",
         title = title,
         type = type.toAudioType(),
-        durationMs = (duration?.let { it * 1000 }) ?: 0,
+        durationMs = (duration?.toLong()?.let { it * 1000 }) ?: 0,
         artistUri = artistId?.let { getArtistUri(it) } ?: Uri.EMPTY,
         artistName = artist ?: "",
         albumUri = albumId?.let { getAlbumUri(it) } ?: Uri.EMPTY,
