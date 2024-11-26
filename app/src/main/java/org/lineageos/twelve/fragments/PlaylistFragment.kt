@@ -34,6 +34,7 @@ import org.lineageos.twelve.R
 import org.lineageos.twelve.datasources.MediaError
 import org.lineageos.twelve.ext.getParcelable
 import org.lineageos.twelve.ext.getViewProperty
+import org.lineageos.twelve.ext.loadThumbnail
 import org.lineageos.twelve.ext.navigateSafe
 import org.lineageos.twelve.ext.setProgressCompat
 import org.lineageos.twelve.ext.updateMargin
@@ -244,7 +245,10 @@ class PlaylistFragment : Fragment(R.layout.fragment_playlist) {
                     toolbar.title = playlist.name
                     playlistNameTextView.text = playlist.name
 
-                    thumbnailImageView.setImageResource(R.drawable.ic_playlist_play)
+                    thumbnailImageView.loadThumbnail(
+                        playlist.thumbnail,
+                        placeholder = R.drawable.ic_playlist_play
+                    )
 
                     val totalDurationMs = audios.sumOf { audio ->
                         audio?.durationMs ?: 0
