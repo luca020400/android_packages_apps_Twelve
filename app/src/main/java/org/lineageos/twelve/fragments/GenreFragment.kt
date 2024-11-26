@@ -33,6 +33,7 @@ import org.lineageos.twelve.R
 import org.lineageos.twelve.datasources.MediaError
 import org.lineageos.twelve.ext.getParcelable
 import org.lineageos.twelve.ext.getViewProperty
+import org.lineageos.twelve.ext.loadThumbnail
 import org.lineageos.twelve.ext.navigateSafe
 import org.lineageos.twelve.ext.setProgressCompat
 import org.lineageos.twelve.ext.updatePadding
@@ -262,7 +263,10 @@ class GenreFragment : Fragment(R.layout.fragment_genre) {
                         genreNameTextView.text = genreName
                     }
 
-                    thumbnailImageView.setImageResource(R.drawable.ic_genres)
+                    thumbnailImageView.loadThumbnail(
+                        genre.thumbnail,
+                        placeholder = R.drawable.ic_genres
+                    )
 
                     appearsInAlbumsAdapter.submitList(genreContent.appearsInAlbums)
                     appearsInPlaylistsAdapter.submitList(genreContent.appearsInPlaylists)
