@@ -28,7 +28,6 @@
     <string name="no_playlists">Engir spilunarlistar</string>
     <string name="no_audios">Engar hljóðskrár</string>
     <string name="no_results">Engar niðurstöður</string>
-    <string name="genre_unknown">Óþekkt</string>
     <plurals name="tracks_count">
         <item quantity="one">%d lög</item>
         <item quantity="other">%d lög</item>

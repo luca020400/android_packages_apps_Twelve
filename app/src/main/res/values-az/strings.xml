@@ -14,6 +14,7 @@
     <string name="main_fragment_section_activity">Fəaliyyət</string>
     <string name="main_fragment_section_search">Axtar</string>
     <string name="main_fragment_section_library">Kitabxana</string>
+    <string name="search_hint">Axtar…</string>
     <string name="library_fragment_menu_albums">Albomlar</string>
     <string name="library_fragment_menu_artists">Sənətçilər</string>
     <string name="library_fragment_menu_genres">Janrlar</string>
@@ -22,13 +23,17 @@
     <string name="no_playlists_comma">Pleylist yoxdur,</string>
     <string name="create_playlist_suggestion">Yenisi yaradılsın?</string>
     <string name="create_playlist_confirm">Yarat</string>
+    <string name="no_activity">Fəaliyyət yoxdur</string>
     <string name="no_albums">Albom yoxdur</string>
     <string name="no_artists">Sənətçi yoxdur</string>
     <string name="no_genres">Janr yoxdur</string>
     <string name="no_playlists">Pleylist yoxdur</string>
     <string name="no_audios">Səs yoxdur</string>
     <string name="no_results">Nəticə yoxdur</string>
-    <string name="genre_unknown">Bilinmir</string>
+    <string name="unknown">Bilinmir</string>
+    <string name="album_unknown">Bilinməyən albom</string>
+    <string name="artist_unknown">Bilinməyən sənətçi</string>
+    <string name="genre_unknown">Bilinməyən janr</string>
     <plurals name="tracks_count">
         <item quantity="one">%d trek</item>
         <item quantity="other">%d trek</item>
@@ -52,7 +57,10 @@
     <string name="delete_playlist">Pleylisti sil</string>
     <string name="delete_playlist_message">Bu pleylisti silmək istədiyinizə əminsiniz?</string>
     <string name="delete_playlist_positive">Sil</string>
+    <string name="audio_effects">Səs effektləri</string>
     <string name="playback_speed_format">%1$s×</string>
+    <string name="playback_speed">Oxutma sürəti</string>
+    <string name="visualizer">Vizuallaşdırıcı</string>
     <string name="audio_source">Mənbə</string>
     <string name="audio_transcoding">Transcoding</string>
     <string name="audio_output">Çıxış</string>
@@ -105,6 +113,8 @@
     <string name="enable_offload_summary">Səs oxutma üçün offload audio path-ını istifadə edin. Bunu sıradan çıxartmaq, enerji istifadəsini artıra bilər, ancaq səs oxutma və ya son proseslə bağlı problemlə üzləşdikdə faydalı ola bilər</string>
     <string name="stop_playback_on_task_removed">Tətbiq sonunculardan silindikdə oxutmanı dayandır</string>
     <string name="stop_playback_on_task_removed_summary">Tətbiq son tətbiqlərdən təmizləndikdə oxutmanı dayandır</string>
+    <string name="skip_silence">Səssizliyi ötür</string>
+    <string name="skip_silence_summary">Səs oxudularkən səssizliyi ötür</string>
     <string name="now_playing_widget_description">İndi oxudulur</string>
     <string name="now_playing_widget_dummy_title">Başlıq</string>
     <string name="now_playing_widget_dummy_artist">Sənətçi</string>
@@ -122,4 +132,10 @@
     <string name="sort_by_release_date">Buraxılış tarixi</string>
     <string name="sort_by_title">Başlıq</string>
     <string name="sort_by_unknown">Bilinmir</string>
+    <string name="activity_most_played_albums">Ən çox oxudulan albomlar</string>
+    <string name="activity_random_albums">Təsadüfi albomlar</string>
+    <string name="activity_random_songs">Təsadüfi mahnılar</string>
+    <string name="content_description_play_pause">Oxut/fasilə ver</string>
+    <string name="content_description_thumbnail">Kiçik şəkil</string>
+    <string name="play_all">Hamısını oxut</string>
 </resources>

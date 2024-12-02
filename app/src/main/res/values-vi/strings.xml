@@ -14,6 +14,7 @@
     <string name="main_fragment_section_activity">Hoạt động</string>
     <string name="main_fragment_section_search">Tìm kiếm</string>
     <string name="main_fragment_section_library">Thư viện</string>
+    <string name="search_hint">Tìm…</string>
     <string name="library_fragment_menu_albums">Album</string>
     <string name="library_fragment_menu_artists">Nghệ sĩ</string>
     <string name="library_fragment_menu_genres">Thể loại</string>
@@ -22,13 +23,17 @@
     <string name="no_playlists_comma">Không có danh sách phát,</string>
     <string name="create_playlist_suggestion">Tạo một cái mới?</string>
     <string name="create_playlist_confirm">Tạo</string>
+    <string name="no_activity">Không có hoạt động</string>
     <string name="no_albums">Không có album</string>
     <string name="no_artists">Không có nghệ sĩ</string>
     <string name="no_genres">Không có thể loại</string>
     <string name="no_playlists">Không có danh sách phát</string>
     <string name="no_audios">Không có âm thanh</string>
     <string name="no_results">Không có kết quả</string>
-    <string name="genre_unknown">Không rõ</string>
+    <string name="unknown">Không rõ</string>
+    <string name="album_unknown">Không rõ album</string>
+    <string name="artist_unknown">Không rõ nghệ sĩ</string>
+    <string name="genre_unknown">Không rõ thể loại</string>
     <plurals name="tracks_count">
         <item quantity="other">%d bài</item>
     </plurals>
@@ -50,7 +55,10 @@
     <string name="delete_playlist">Xóa danh sách phát</string>
     <string name="delete_playlist_message">Bạn có chắc chắn muốn xóa danh sách phát này?</string>
     <string name="delete_playlist_positive">Xóa</string>
+    <string name="audio_effects">Hiệu ứng âm thanh</string>
     <string name="playback_speed_format">%1$s×</string>
+    <string name="playback_speed">Tốc độ phát lại</string>
+    <string name="visualizer">Sóng nhạc</string>
     <string name="audio_source">Nguồn</string>
     <string name="audio_transcoding">Chuyển mã</string>
     <string name="audio_output">Đầu ra</string>
@@ -103,6 +111,8 @@
     <string name="enable_offload_summary">Sử dụng đường dẫn âm thanh offload để phát âm thanh. Vô hiệu hóa tùy chọn này có thể làm tăng mức tiêu thụ năng lượng nhưng có thể hữu ích nếu bạn gặp vấn đề với việc phát âm thanh hoặc xử lý hậu kỳ</string>
     <string name="stop_playback_on_task_removed">Dừng phát khi xóa ứng dụng khỏi danh sách gần đây</string>
     <string name="stop_playback_on_task_removed_summary">Dừng phát khi ứng dụng được xóa khỏi mục gần đây</string>
+    <string name="skip_silence">Bỏ qua khoảng trống</string>
+    <string name="skip_silence_summary">Bỏ qua khoảng trống khi phát âm thanh</string>
     <string name="now_playing_widget_description">Đang phát</string>
     <string name="now_playing_widget_dummy_title">Tên</string>
     <string name="now_playing_widget_dummy_artist">Nghệ sĩ</string>
@@ -120,4 +130,10 @@
     <string name="sort_by_release_date">Ngày phát hành</string>
     <string name="sort_by_title">Tiêu đề</string>
     <string name="sort_by_unknown">Không rõ</string>
+    <string name="activity_most_played_albums">Album được phát nhiều nhất</string>
+    <string name="activity_random_albums">Album ngẫu nhiên</string>
+    <string name="activity_random_songs">Bài hát ngẫu nhiên</string>
+    <string name="content_description_play_pause">Phát/Tạm dừng</string>
+    <string name="content_description_thumbnail">Hình thu nhỏ</string>
+    <string name="play_all">Phát tất cả</string>
 </resources>

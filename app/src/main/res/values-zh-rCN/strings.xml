@@ -14,6 +14,7 @@
     <string name="main_fragment_section_activity">活动</string>
     <string name="main_fragment_section_search">搜索</string>
     <string name="main_fragment_section_library">库</string>
+    <string name="search_hint">搜索…</string>
     <string name="library_fragment_menu_albums">专辑</string>
     <string name="library_fragment_menu_artists">艺术家</string>
     <string name="library_fragment_menu_genres">流派</string>
@@ -22,13 +23,17 @@
     <string name="no_playlists_comma">没有播放列表，</string>
     <string name="create_playlist_suggestion">创建一个新的？</string>
     <string name="create_playlist_confirm">创建</string>
+    <string name="no_activity">无活动</string>
     <string name="no_albums">没有专辑</string>
     <string name="no_artists">没有艺术家</string>
     <string name="no_genres">没有流派</string>
     <string name="no_playlists">没有播放列表</string>
     <string name="no_audios">没有音频</string>
     <string name="no_results">无结果</string>
-    <string name="genre_unknown">未知</string>
+    <string name="unknown">未知</string>
+    <string name="album_unknown">未知专辑</string>
+    <string name="artist_unknown">未知艺术家</string>
+    <string name="genre_unknown">未知流派</string>
     <plurals name="tracks_count">
         <item quantity="other">%d 音轨</item>
     </plurals>
@@ -50,7 +55,10 @@
     <string name="delete_playlist">删除播放列表</string>
     <string name="delete_playlist_message">您确定要删除这些播放列表?</string>
     <string name="delete_playlist_positive">删除</string>
+    <string name="audio_effects">音效</string>
     <string name="playback_speed_format">%1$s×</string>
+    <string name="playback_speed">播放速度</string>
+    <string name="visualizer">可视化</string>
     <string name="audio_source">来源</string>
     <string name="audio_transcoding">转码中</string>
     <string name="audio_output">输出</string>
@@ -122,4 +130,10 @@
     <string name="sort_by_release_date">发布日期</string>
     <string name="sort_by_title">标题</string>
     <string name="sort_by_unknown">未知</string>
+    <string name="activity_most_played_albums">最常播放的专辑</string>
+    <string name="activity_random_albums">随机专辑</string>
+    <string name="activity_random_songs">随机歌曲</string>
+    <string name="content_description_play_pause">播放/暂停</string>
+    <string name="content_description_thumbnail">缩略图</string>
+    <string name="play_all">播放全部</string>
 </resources>

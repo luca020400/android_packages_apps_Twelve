@@ -14,6 +14,7 @@
     <string name="main_fragment_section_activity">Gníomhaíocht</string>
     <string name="main_fragment_section_search">Cuardach</string>
     <string name="main_fragment_section_library">Leabharlann</string>
+    <string name="search_hint">Cuardaigh…</string>
     <string name="library_fragment_menu_albums">Albaim</string>
     <string name="library_fragment_menu_artists">Ealaíontóirí</string>
     <string name="library_fragment_menu_genres">Seánraí</string>
@@ -22,13 +23,13 @@
     <string name="no_playlists_comma">Gan seinmliostaí,</string>
     <string name="create_playlist_suggestion">Cruthaigh ceann nua?</string>
     <string name="create_playlist_confirm">Cruthaigh</string>
+    <string name="no_activity">Gan aon ghníomhaíocht</string>
     <string name="no_albums">Gan albam</string>
     <string name="no_artists">Gan ealaíontóirí</string>
     <string name="no_genres">Gan seánraí</string>
     <string name="no_playlists">Gan seinmliostaí</string>
     <string name="no_audios">Uimh fuaime</string>
     <string name="no_results">Gan torthaí</string>
-    <string name="genre_unknown">Anaithnid</string>
     <plurals name="tracks_count">
         <item quantity="one">%d rian</item>
         <item quantity="two">%d rianta</item>
@@ -58,7 +59,10 @@
     <string name="delete_playlist">Scrios seinmliosta</string>
     <string name="delete_playlist_message">An bhfuil tú cinnte gur mhaith leat an seinmliosta seo a scriosadh?</string>
     <string name="delete_playlist_positive">Scrios</string>
+    <string name="audio_effects">Éifeachtaí fuaime</string>
     <string name="playback_speed_format">%1$s×</string>
+    <string name="playback_speed">Luas athsheinm</string>
+    <string name="visualizer">Amharcléiritheoir</string>
     <string name="audio_source">Foinse</string>
     <string name="audio_transcoding">Traschódú</string>
     <string name="audio_output">Aschur</string>
@@ -111,6 +115,8 @@
     <string name="enable_offload_summary">Úsáid an cosán fuaime díluchtaithe le haghaidh athsheinm fuaime. Má dhéantar é seo a dhíchumasú, d’fhéadfadh méadú ar úsáid cumhachta ach d’fhéadfadh sé a bheith úsáideach má bhíonn fadhbanna agat le hathsheinm fuaime nó le próiseáil postála</string>
     <string name="stop_playback_on_task_removed">Cuir stop leis an athsheinm nuair a bhaintear feidhmchlár de na nuashonruithe</string>
     <string name="stop_playback_on_task_removed_summary">Cuir stop le hathsheinm nuair a bheidh an aip glanta ó na cinn is déanaí</string>
+    <string name="skip_silence">Scip an ciúnas</string>
+    <string name="skip_silence_summary">Scip an ciúnas agus fuaim á sheinm</string>
     <string name="now_playing_widget_description">Anois ag imirt</string>
     <string name="now_playing_widget_dummy_title">Teideal</string>
     <string name="now_playing_widget_dummy_artist">Ealaíontóir</string>
@@ -128,4 +134,10 @@
     <string name="sort_by_release_date">Dáta scaoilte</string>
     <string name="sort_by_title">Teideal</string>
     <string name="sort_by_unknown">Anaithnid</string>
+    <string name="activity_most_played_albums">Albam is mó seinnte</string>
+    <string name="activity_random_albums">Albam randamach</string>
+    <string name="activity_random_songs">Amhráin randamach</string>
+    <string name="content_description_play_pause">Amhráin randamach</string>
+    <string name="content_description_thumbnail">Mionsamhla</string>
+    <string name="play_all">Seinn ar fad</string>
 </resources>

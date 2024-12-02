@@ -14,6 +14,7 @@
     <string name="main_fragment_section_activity">Activitate</string>
     <string name="main_fragment_section_search">Căutare</string>
     <string name="main_fragment_section_library">Bibliotecă</string>
+    <string name="search_hint">Căutare…</string>
     <string name="library_fragment_menu_albums">Albume</string>
     <string name="library_fragment_menu_artists">Artiști</string>
     <string name="library_fragment_menu_genres">Genuri</string>
@@ -22,13 +23,17 @@
     <string name="no_playlists_comma">Niciun playlist,</string>
     <string name="create_playlist_suggestion">Creați unul nou?</string>
     <string name="create_playlist_confirm">Creează</string>
+    <string name="no_activity">Nicio activitate</string>
     <string name="no_albums">Niciun album</string>
     <string name="no_artists">Niciun artist</string>
     <string name="no_genres">Niciun gen</string>
     <string name="no_playlists">Niciun playlist</string>
     <string name="no_audios">Niciun audio</string>
     <string name="no_results">Niciun rezultat</string>
-    <string name="genre_unknown">Necunoscut</string>
+    <string name="unknown">Necunoscut</string>
+    <string name="album_unknown">Album necunoscut</string>
+    <string name="artist_unknown">Artist necunoscut</string>
+    <string name="genre_unknown">Gen necunoscut</string>
     <plurals name="tracks_count">
         <item quantity="one">%d melodie</item>
         <item quantity="few">%d melodii</item>
@@ -54,7 +59,10 @@
     <string name="delete_playlist">Șterge playlist-ul</string>
     <string name="delete_playlist_message">Sunteți sigur că doriți să ștergeți acest playlist?</string>
     <string name="delete_playlist_positive">Șterge</string>
+    <string name="audio_effects">Efecte audio</string>
     <string name="playback_speed_format">%1$s×</string>
+    <string name="playback_speed">Viteza de redare</string>
+    <string name="visualizer">Vizualizator</string>
     <string name="audio_source">Sursă</string>
     <string name="audio_transcoding">Transcodare</string>
     <string name="audio_output">Ieșire </string>
@@ -107,6 +115,8 @@
     <string name="enable_offload_summary">Utilizați calea audio offload pentru redarea audio. Dezactivarea acestei opțiuni poate crește consumul de energie, dar poate fi utilă dacă întâmpinați probleme cu redarea audio sau cu post processing-ul</string>
     <string name="stop_playback_on_task_removed">Oprește redarea la eliminarea aplicației din recente</string>
     <string name="stop_playback_on_task_removed_summary">Oprește redarea atunci când aplicația este ștearsă din recente</string>
+    <string name="skip_silence">Omite tăcerea</string>
+    <string name="skip_silence_summary">Omite tăcerea la redarea audio</string>
     <string name="now_playing_widget_description">Se redă acum</string>
     <string name="now_playing_widget_dummy_title">Titlu</string>
     <string name="now_playing_widget_dummy_artist">Artist</string>
@@ -124,4 +134,10 @@
     <string name="sort_by_release_date">Data lansării</string>
     <string name="sort_by_title">Titlu</string>
     <string name="sort_by_unknown">Necunoscut</string>
+    <string name="activity_most_played_albums">Cele mai redate albume</string>
+    <string name="activity_random_albums">Albume aleatoare</string>
+    <string name="activity_random_songs">Melodii aleatorii</string>
+    <string name="content_description_play_pause">Redă/pauză</string>
+    <string name="content_description_thumbnail">Thumbnail</string>
+    <string name="play_all">Redă tot</string>
 </resources>

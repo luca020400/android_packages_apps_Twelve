@@ -28,7 +28,6 @@
     <string name="no_playlists">Keine Wiedergabelisten</string>
     <string name="no_audios">Keine Audiodateien</string>
     <string name="no_results">Keine Ergebnisse</string>
-    <string name="genre_unknown">Unbekannt</string>
     <plurals name="tracks_count">
         <item quantity="one">%d Titel</item>
         <item quantity="other">%d Titel</item>

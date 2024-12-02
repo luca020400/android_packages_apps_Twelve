@@ -14,6 +14,7 @@
     <string name="main_fragment_section_activity">Aktywność</string>
     <string name="main_fragment_section_search">Wyszukaj</string>
     <string name="main_fragment_section_library">Biblioteka</string>
+    <string name="search_hint">Szukaj…</string>
     <string name="library_fragment_menu_albums">Albumy</string>
     <string name="library_fragment_menu_artists">Wykonawcy</string>
     <string name="library_fragment_menu_genres">Gatunki</string>
@@ -22,13 +23,17 @@
     <string name="no_playlists_comma">Brak list odtwarzania,</string>
     <string name="create_playlist_suggestion">Utworzyć nową?</string>
     <string name="create_playlist_confirm">Utwórz</string>
+    <string name="no_activity">Brak aktywności</string>
     <string name="no_albums">Brak albumów</string>
     <string name="no_artists">Brak wykonawców</string>
     <string name="no_genres">Brak gatunków</string>
     <string name="no_playlists">Brak list odtwarzania</string>
     <string name="no_audios">Brak dźwięków</string>
     <string name="no_results">Brak wyników</string>
-    <string name="genre_unknown">Nieznany</string>
+    <string name="unknown">Nieznane</string>
+    <string name="album_unknown">Nieznany album</string>
+    <string name="artist_unknown">Nieznany wykonawca</string>
+    <string name="genre_unknown">Nieznany gatunek</string>
     <plurals name="tracks_count">
         <item quantity="one">%d utwór</item>
         <item quantity="few">%d utwory</item>
@@ -56,7 +61,10 @@
     <string name="delete_playlist">Usuń listę odtwarzania</string>
     <string name="delete_playlist_message">Czy na pewno chcesz usunąć tę listę odtwarzania?</string>
     <string name="delete_playlist_positive">Usuń</string>
+    <string name="audio_effects">Efekty dźwiękowe</string>
     <string name="playback_speed_format">%1$s×</string>
+    <string name="playback_speed">Prędkość odtwarzania</string>
+    <string name="visualizer">Wizualizacja</string>
     <string name="audio_source">Źródło</string>
     <string name="audio_transcoding">Przetwarzanie</string>
     <string name="audio_output">Wyjście</string>
@@ -109,6 +117,8 @@
     <string name="enable_offload_summary">Używaj ścieżki odciążenia audio do odtwarzania dźwięku. Wyłączenie tej opcji może zwiększyć zużycie energii, ale może być przydatne w przypadku problemów z odtwarzaniem dźwięku lub przetwarzaniem końcowym</string>
     <string name="stop_playback_on_task_removed">Zatrzymuj odtwarzanie po usunięciu aplikacji z ostatnio używanych</string>
     <string name="stop_playback_on_task_removed_summary">Zatrzymuj odtwarzanie, gdy aplikacja została usunięta z ostatnio używanych</string>
+    <string name="skip_silence">Pomijaj ciszę</string>
+    <string name="skip_silence_summary">Pomijaj ciszę podczas odtwarzania dźwięku</string>
     <string name="now_playing_widget_description">Teraz odtwarzane</string>
     <string name="now_playing_widget_dummy_title">Tytuł</string>
     <string name="now_playing_widget_dummy_artist">Wykonawca</string>
@@ -126,4 +136,10 @@
     <string name="sort_by_release_date">Daty wydania</string>
     <string name="sort_by_title">Tytułu</string>
     <string name="sort_by_unknown">Nieokreślono</string>
+    <string name="activity_most_played_albums">Najczęściej słuchane albumy</string>
+    <string name="activity_random_albums">Losowe albumy</string>
+    <string name="activity_random_songs">Losowe utwory</string>
+    <string name="content_description_play_pause">Odtwórz/wstrzymaj</string>
+    <string name="content_description_thumbnail">Miniaturka</string>
+    <string name="play_all">Odtwórz wszystko</string>
 </resources>
