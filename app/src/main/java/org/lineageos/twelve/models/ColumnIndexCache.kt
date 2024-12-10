@@ -8,7 +8,7 @@ package org.lineageos.twelve.models
 import android.database.Cursor
 import androidx.core.database.getStringOrNull
 
-class ColumnIndexCache(private val cursor: Cursor, projection: List<String>) {
+class ColumnIndexCache(private val cursor: Cursor, projection: Array<String>) {
     private val indexMap = projection.associateWith { cursor.getColumnIndexOrThrow(it) }
 
     fun getInt(columnName: String) = cursor.getInt(indexMap[columnName]!!)
