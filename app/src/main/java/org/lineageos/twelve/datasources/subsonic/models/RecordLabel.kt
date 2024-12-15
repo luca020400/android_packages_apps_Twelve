@@ -7,12 +7,15 @@ package org.lineageos.twelve.datasources.subsonic.models
 
 import kotlinx.serialization.Serializable
 
+/**
+ * A record label for an album.
+ *
+ * Note: OpenSubsonic only.
+ *
+ * @param name The record label name
+ */
 @Suppress("PROVIDED_RUNTIME_TOO_LOW")
 @Serializable
-data class ArtistsID3(
-    val index: List<IndexID3>,
-    val ignoredArticles: String,
-
-    // Navidrome
-    val lastModified: Long? = null, // TODO
+data class RecordLabel(
+    val name: String,
 )

@@ -7,12 +7,17 @@ package org.lineageos.twelve.datasources.subsonic.models
 
 import kotlinx.serialization.Serializable
 
+/**
+ * A disc title for an album.
+ *
+ * Note: OpenSubsonic only.
+ *
+ * @param disc The disc number
+ * @param title The name of the disc
+ */
 @Suppress("PROVIDED_RUNTIME_TOO_LOW")
 @Serializable
-data class ArtistsID3(
-    val index: List<IndexID3>,
-    val ignoredArticles: String,
-
-    // Navidrome
-    val lastModified: Long? = null, // TODO
+data class DiscTitle(
+    val disc: Int,
+    val title: String,
 )
