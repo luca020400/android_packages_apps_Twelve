@@ -30,6 +30,10 @@
     <string name="no_playlists">Gan seinmliostaí</string>
     <string name="no_audios">Uimh fuaime</string>
     <string name="no_results">Gan torthaí</string>
+    <string name="unknown">Anaithnid</string>
+    <string name="album_unknown">Albam anaithnid</string>
+    <string name="artist_unknown">Ealaíontóir anaithnid</string>
+    <string name="genre_unknown">Seánra anaithnid</string>
     <plurals name="tracks_count">
         <item quantity="one">%d rian</item>
         <item quantity="two">%d rianta</item>
