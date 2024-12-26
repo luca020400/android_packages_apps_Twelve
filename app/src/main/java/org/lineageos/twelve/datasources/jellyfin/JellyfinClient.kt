@@ -234,6 +234,7 @@ class JellyfinClient(
     private fun getSortParameter(sortingRule: SortingRule) = buildList {
         add(
             "sortBy" to when (sortingRule.strategy) {
+                SortingStrategy.ARTIST_NAME -> "AlbumArtist,Artist"
                 SortingStrategy.CREATION_DATE -> "DateCreated"
                 SortingStrategy.MODIFICATION_DATE -> "DateLastContentAdded"
                 SortingStrategy.NAME -> "Name"

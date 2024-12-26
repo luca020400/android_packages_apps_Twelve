@@ -206,6 +206,7 @@ class LocalDataSource(
         bundleOf(
             ContentResolver.QUERY_ARG_SORT_COLUMNS to listOfNotNull(
                 when (sortingRule.strategy) {
+                    SortingStrategy.ARTIST_NAME -> MediaStore.Audio.AlbumColumns.ARTIST
                     SortingStrategy.CREATION_DATE -> MediaStore.Audio.AlbumColumns.LAST_YEAR
                     SortingStrategy.NAME -> MediaStore.Audio.AlbumColumns.ALBUM
                     else -> null

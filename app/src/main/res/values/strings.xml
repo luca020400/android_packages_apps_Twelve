@@ -184,6 +184,7 @@
     <string name="queue">Queue</string>
 
     <!-- Sorting strategies -->
+    <string name="sort_by_artist_name">Artist name</string>
     <string name="sort_by_creation_date">Created at</string>
     <string name="sort_by_last_modified">Last modified</string>
     <string name="sort_by_last_activity">Last activity</string>

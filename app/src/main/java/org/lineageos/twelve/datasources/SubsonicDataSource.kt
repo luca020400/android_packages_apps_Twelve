@@ -151,6 +151,7 @@ class SubsonicDataSource(arguments: Bundle, cache: Cache? = null) : MediaDataSou
             album.maybeSortedBy(
                 sortingRule.reverse,
                 when (sortingRule.strategy) {
+                    SortingStrategy.ARTIST_NAME -> { album -> album.artist }
                     SortingStrategy.CREATION_DATE -> { album -> album.year }
                     SortingStrategy.NAME -> { album -> album.name }
                     SortingStrategy.PLAY_COUNT -> { album -> album.playCount }
