@@ -311,7 +311,7 @@ class SubsonicDataSource(arguments: Bundle, cache: Cache? = null) : MediaDataSou
         null, name, listOf()
     ).toRequestStatus {
         onPlaylistsChanged()
-        getPlaylistUri(id.toString())
+        getPlaylistUri(id)
     }
 
     override suspend fun renamePlaylist(
@@ -401,7 +401,7 @@ class SubsonicDataSource(arguments: Bundle, cache: Cache? = null) : MediaDataSou
     )
 
     private fun org.lineageos.twelve.datasources.subsonic.models.Playlist.toMediaItem() = Playlist(
-        uri = getPlaylistUri(id.toString()),
+        uri = getPlaylistUri(id),
         name = name,
     )
 
