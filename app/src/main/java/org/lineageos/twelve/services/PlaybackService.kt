@@ -100,6 +100,9 @@ class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
         (application as TwelveApplication).mediaRepository
     }
 
+    private val audioSessionId
+        get() = (application as TwelveApplication).audioSessionId
+
     private val mediaLibrarySessionCallback = object : MediaLibrarySession.Callback {
         override fun onConnect(
             session: MediaSession,
@@ -315,7 +318,7 @@ class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
                 }
         )
 
-        exoPlayer.audioSessionId = (application as TwelveApplication).audioSessionId
+        exoPlayer.audioSessionId = audioSessionId
         openAudioEffectSession()
     }
 
@@ -385,10 +388,7 @@ class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
     private fun openAudioEffectSession() {
         Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION).apply {
             putExtra(AudioEffect.EXTRA_PACKAGE_NAME, application.packageName)
-            putExtra(
-                AudioEffect.EXTRA_AUDIO_SESSION,
-                (application as TwelveApplication).audioSessionId
-            )
+            putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId)
             putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC)
             sendBroadcast(this)
         }
@@ -397,10 +397,7 @@ class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
     private fun closeAudioEffectSession() {
         Intent(AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION).apply {
             putExtra(AudioEffect.EXTRA_PACKAGE_NAME, application.packageName)
-            putExtra(
-                AudioEffect.EXTRA_AUDIO_SESSION,
-                (application as TwelveApplication).audioSessionId
-            )
+            putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId)
             putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC)
             sendBroadcast(this)
         }
