@@ -8,6 +8,7 @@
 
     <!-- Toast messages -->
     <string name="app_permissions_toast">Permissions not granted by the user.</string>
+    <string name="visualizer_permissions_toast">Record audio permission is required for the visualizer.</string>
 
     <!-- Request status error types -->
     <string name="request_status_error_type_unknown">Unknown</string>

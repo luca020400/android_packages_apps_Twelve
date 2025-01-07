@@ -300,6 +300,16 @@ open class NowPlayingViewModel(application: Application) : TwelveViewModel(appli
             initialValue = VisualizerType.NONE
         )
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val isVisualizerEnabled = currentVisualizerType
+        .mapLatest { it != VisualizerType.NONE }
+        .flowOn(Dispatchers.IO)
+        .stateIn(
+            viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = false
+        )
+
     fun togglePlayPause() {
         mediaController.value?.let {
             if (it.isPlaying) {
