@@ -7,7 +7,6 @@ package org.lineageos.twelve
 
 import android.app.Application
 import androidx.media3.common.util.UnstableApi
-import androidx.media3.common.util.Util
 import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.SingletonImageLoader
