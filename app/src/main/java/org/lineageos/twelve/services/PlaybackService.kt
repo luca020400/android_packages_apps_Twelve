@@ -79,6 +79,10 @@ class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
             const val ARG_VALUE = "value"
             const val RSP_VALUE = "value"
 
+            fun fromCustomAction(
+                customAction: String
+            ) = entries.firstOrNull { it.value == customAction }
+
             fun MediaController.sendCustomCommand(
                 customCommand: CustomCommand,
                 extras: Bundle
@@ -263,8 +267,8 @@ class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
             customCommand: SessionCommand,
             args: Bundle
         ) = lifecycle.coroutineScope.future {
-            when (customCommand.customAction) {
-                CustomCommand.TOGGLE_OFFLOAD.value -> {
+            when (CustomCommand.fromCustomAction(customCommand.customAction)) {
+                CustomCommand.TOGGLE_OFFLOAD -> {
                     args.getBoolean(CustomCommand.ARG_VALUE).let {
                         mediaLibrarySession?.player?.setOffloadEnabled(it)
                     }
@@ -272,7 +276,7 @@ class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
                     SessionResult(SessionResult.RESULT_SUCCESS)
                 }
 
-                CustomCommand.TOGGLE_SKIP_SILENCE.value -> {
+                CustomCommand.TOGGLE_SKIP_SILENCE -> {
                     args.getBoolean(CustomCommand.ARG_VALUE).let {
                         ExoPlayer::class.cast(mediaLibrarySession?.player).skipSilenceEnabled = it
                     }
@@ -280,14 +284,14 @@ class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
                     SessionResult(SessionResult.RESULT_SUCCESS)
                 }
 
-                CustomCommand.GET_AUDIO_SESSION_ID.value -> {
+                CustomCommand.GET_AUDIO_SESSION_ID -> {
                     SessionResult(
                         SessionResult.RESULT_SUCCESS,
                         bundleOf(CustomCommand.RSP_VALUE to audioSessionId),
                     )
                 }
 
-                else -> SessionResult(SessionError.ERROR_NOT_SUPPORTED)
+                null -> SessionResult(SessionError.ERROR_NOT_SUPPORTED)
             }
         }
     }
