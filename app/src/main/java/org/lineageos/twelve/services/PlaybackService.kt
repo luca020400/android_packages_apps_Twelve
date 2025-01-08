@@ -180,7 +180,7 @@ class PlaybackService : MediaLibraryService(), Player.Listener, LifecycleOwner {
             browser: MediaSession.ControllerInfo,
             params: LibraryParams?,
         ) = lifecycle.coroutineScope.future {
-            LibraryResult.ofItem(mediaRepositoryTree.getRootMediaItem(), params)
+            LibraryResult.ofItem(mediaRepositoryTree.rootMediaItem, params)
         }
 
         override fun onGetItem(
