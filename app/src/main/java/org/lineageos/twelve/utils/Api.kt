@@ -133,7 +133,7 @@ suspend fun <T, O> MethodResult<T>.toRequestStatus(
         }
     )
 
-    is MethodResult.DeserializationError -> RequestStatus.Error(MediaError.DESERIALIZATION)
+    is MethodResult.DeserializationError -> RequestStatus.Error(MediaError.DESERIALIZATION, error)
 
     is MethodResult.GenericError -> RequestStatus.Error(MediaError.IO)
 }
