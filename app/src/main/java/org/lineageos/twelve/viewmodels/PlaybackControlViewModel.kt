@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
@@ -22,7 +23,7 @@ import org.lineageos.twelve.ext.withPitch
 
 class PlaybackControlViewModel(application: Application) : TwelveViewModel(application) {
     private val _pitchSliderVisible = MutableStateFlow(false)
-    val pitchSliderVisible = _pitchSliderVisible
+    val pitchSliderVisible = _pitchSliderVisible.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val playbackParameters = mediaController
@@ -77,11 +78,10 @@ class PlaybackControlViewModel(application: Application) : TwelveViewModel(appli
         )
     }
 
-    fun togglePitchUnlock() {
-        val newValue = _pitchSliderVisible.value.not()
-        _pitchSliderVisible.value = newValue
+    fun setPitchUnlock(value: Boolean) {
+        _pitchSliderVisible.value = value
 
-        if (!newValue) {
+        if (!value) {
             mediaController.value?.setPlaybackParameters(
                 playbackParameters.value.withPitch(PITCH_DEFAULT)
             )

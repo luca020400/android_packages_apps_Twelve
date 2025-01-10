@@ -53,8 +53,8 @@ class PlaybackControlBottomSheetDialogFragment : BottomSheetDialogFragment(
             viewModel.increasePlaybackSpeed()
         }
 
-        playbackPitchUnlockMaterialSwitch.setOnClickListener {
-            viewModel.togglePitchUnlock()
+        playbackPitchUnlockMaterialSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setPitchUnlock(isChecked)
         }
 
         val sliderFrom = playbackPitchSlider.valueFrom
