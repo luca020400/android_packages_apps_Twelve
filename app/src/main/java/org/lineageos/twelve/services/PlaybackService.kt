@@ -39,6 +39,7 @@ import kotlinx.coroutines.launch
 import org.lineageos.twelve.MainActivity
 import org.lineageos.twelve.R
 import org.lineageos.twelve.TwelveApplication
+import org.lineageos.twelve.ext.enableFloatOutput
 import org.lineageos.twelve.ext.enableOffload
 import org.lineageos.twelve.ext.setOffloadEnabled
 import org.lineageos.twelve.ext.skipSilence
@@ -310,7 +311,12 @@ class PlaybackService : MediaLibraryService(), LifecycleOwner {
         val exoPlayer = ExoPlayer.Builder(this)
             .setAudioAttributes(audioAttributes, true)
             .setHandleAudioBecomingNoisy(true)
-            .setRenderersFactory(TurntableRenderersFactory(this))
+            .setRenderersFactory(
+                TurntableRenderersFactory(
+                    this,
+                    sharedPreferences.enableFloatOutput,
+                )
+            )
             .setSkipSilenceEnabled(sharedPreferences.skipSilence)
             .setLoadControl(
                 DefaultLoadControl.Builder()
