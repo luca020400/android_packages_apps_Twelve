@@ -10,5 +10,5 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v6
 
-      - name: Build
-        uses: ./.github/workflows/build
+      - name: REUSE lint
+        uses: ./.github/workflows/reuse
